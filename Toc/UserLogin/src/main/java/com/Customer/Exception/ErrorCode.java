@@ -1,6 +1,5 @@
 package com.Customer.Exception;
 
-
 /**
  * 错误码
  *
@@ -9,8 +8,8 @@ package com.Customer.Exception;
 public enum ErrorCode {
     //enum
     SUCCESS(0, "ok", ""),
+    REPEAT_ERROR(40010, "参数重复", ""),
     PARAMS_ERROR(40000, "请求参数错误", ""),
-    REPEAT_ERROR(40002, "请求参数错误", ""),
     NULL_ERROR(40001, "请求数据为空", ""),
     NOT_LOGIN(40100, "未登录", ""),
     NO_AUTH(40101, "无认证", ""),

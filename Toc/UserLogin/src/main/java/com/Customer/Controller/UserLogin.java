@@ -32,11 +32,11 @@ public class UserLogin {
     public Object userLogin(@RequestBody @NotBlank UserVo userVo) {
         //请求体不为空
         if (userVo == null) {
-            throw new BusinessException(ErrorCode.NULL_ERROR, "请求参数错误");
+            throw new BusinessException(ErrorCode.NULL_ERROR);
         }
         var userPassword = userVo.getUserPassword().trim();
         if (userPassword.length() >= 2 && userPassword.length() <= 18) {
-            QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper(userVo);
+            QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
             UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
             UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
             return userService.getOne(UserBasequeryWrapper) == null ? ResultUtils.error(ErrorCode.AUTH_ERROR) : ResultUtils.success(ErrorCode.SUCCESS);
@@ -49,7 +49,7 @@ public class UserLogin {
     @PostMapping("/registry")
     public Object userRegistry(@RequestBody @NotBlank @NotEmpty UserVo userVo) {
         if (userVo == null) {
-            throw new BusinessException(ErrorCode.NULL_ERROR, "请求参数错误");
+            throw new BusinessException(ErrorCode.NULL_ERROR);
         }
         QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
         UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());

@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 39.106.54.125:8848
+        file-extension: yaml
+        refresh-enabled: true
+        group: userlogin
+        namespace: 57490703-2d4f-4623-80e2-0c8c197879a6
+        prefix: user-login
+  profiles:
+    active: dev
+  application:
+    name: user-login
+  devtools:
+    add-properties: false

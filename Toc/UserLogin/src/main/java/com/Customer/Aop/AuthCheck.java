@@ -3,14 +3,15 @@ package com.Customer.Aop;
 import java.lang.annotation.*;
 
 /**
- * PROJECT_NAME Log
+ * PROJECT_NAME AuthCheck
  *
  * @author Alliance github_https://github.com/AllianceTing
- * DATE 2023/1/29~21:02
+ * DATE 2023/1/17~20:06
  */
-@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Inherited
 @Documented
-public @interface Log {
+public @interface AuthCheck {
+    String value() default "defaultUser";
 }

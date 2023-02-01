@@ -44,6 +44,7 @@ public class UserRegistry {
         } catch (MailException e) {
             e.printStackTrace();
         }
+        //测试
         return 1;
     }
 }

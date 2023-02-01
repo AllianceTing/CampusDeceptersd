@@ -1,5 +1,6 @@
 package com.Customer.Controller;
 
+
 //import com.Customer.Service.RegistryMailService;
 
 import com.Customer.Exception.ErrorCode;
@@ -25,37 +26,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/1/29~22:28
  */
+
 @RestController
 @RequestMapping(value = "/registry")
 public class UserRegistry {
     @Resource
     private UserService userService;
-//    @Resource
-//    RegistryMailService registryMailService;
-//    @Resource
-//    JavaMailSender javaMailSender;
-//
-////    @PostMapping("/mailRegistry")
-////    public void registryUserByMail(MailVo mailVo) {
-////        registryMailService.registryMail(mailVo);
-////    }
-//
-//    @PostMapping("/mailRegistry1")
-//    public Object registryUserByMail1(@RequestBody MailVo mailVo) {
-//        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-//        simpleMailMessage.setFrom(mailVo.getFrom());
-//        simpleMailMessage.setSubject(mailVo.getObject());
-//        simpleMailMessage.setTo(mailVo.getTarget());
-//        simpleMailMessage.setText(mailVo.getContent());
-//        System.out.println(1);
-//        try {
-//            javaMailSender.send(simpleMailMessage);
-//        } catch (MailException e) {
-//            e.printStackTrace();
-//        }
-//        return 1;
-//    }
-
     @PostMapping("/register")
     public Object registryUserByNumber(@RequestBody @Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$"
             , message = "手机号格式有误") String phoneNumber, HttpServletRequest req) {
@@ -87,19 +63,6 @@ public class UserRegistry {
 
     }
 
-//    @PostMapping("/register/username")
-//    public Object userAccount(@RequestBody User user) {
-//        String account = user.getUserAccount().trim();
-//        if(account.length()>18||account.length()<6){
-//            ResultUtils.error(50400,"长度不合法","");
-//        }
-//        QueryWrapper<User> queryWrapper=new QueryWrapper();
-//        queryWrapper.eq("userAccount",account);
-//        User retUser=userService.getOne(queryWrapper);
-//        if(retUser.getUserAccount()!=null){
-//            return
-//        }
-//    }
-}
+
 
 

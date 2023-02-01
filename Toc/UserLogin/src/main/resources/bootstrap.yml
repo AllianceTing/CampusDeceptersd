@@ -6,8 +6,12 @@ spring:
         file-extension: yaml
         refresh-enabled: true
         group: userlogin
-        namespace: 57490703-2d4f-4623-80e2-0c8c197879a6
+        namespace: 2baa1cf1-5510-45d5-9cb2-386305be0509
         prefix: user-login
+      discovery:
+        server-addr: 39.106.54.125:8848
+    inetutils:
+      preferred-networks: 39.106.54.125
   profiles:
     active: dev
   application:

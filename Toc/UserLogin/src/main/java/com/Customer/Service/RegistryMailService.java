@@ -5,8 +5,6 @@ package com.Customer.Service;
  * DATE 2023/1/29~22:14.
  */
 
-import com.Customer.VO.MailVo;
-
 /**
  * @author zzt
  */
@@ -16,5 +14,5 @@ public interface RegistryMailService {
      *
      * @return
      */
-    void registryMail(MailVo mailVo);
+//    void registryMail(MailVo mailVo);
 }

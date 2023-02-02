@@ -34,7 +34,7 @@ public class UserLogin {
     public Object userLogin(@RequestBody @NotBlank UserVo userVo, @NotBlank String strategyName) {
         //请求体不为空
         if (true) {
-            strategyContent.getLoginStrategy(LoginTypeEnum.WeChatLogin).loginStrategy();
+            boolean b = strategyContent.getLoginStrategy(LoginTypeEnum.WeChatLogin).
         }
         if (true) {
             strategyContent.getLoginStrategy(LoginTypeEnum.MailLogin).loginStrategy();

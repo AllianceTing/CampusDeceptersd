@@ -16,7 +16,7 @@ public class loginStrategyByMail implements loginStrategy {
     }
 
     @Override
-    public LoginTypeEnum getPayType() {
+    public LoginTypeEnum getloginType() {
         return LoginTypeEnum.MailLogin;
     }
 }

@@ -16,7 +16,7 @@ public class loginStrategyByWeChat implements loginStrategy {
     }
 
     @Override
-    public LoginTypeEnum getPayType() {
+    public LoginTypeEnum getloginType() {
         return LoginTypeEnum.WeChatLogin;
     }
 }

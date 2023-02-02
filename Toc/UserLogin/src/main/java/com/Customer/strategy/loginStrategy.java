@@ -11,5 +11,5 @@ import org.springframework.stereotype.Component;
 public interface loginStrategy {
     boolean loginStrategy();
 
-    LoginTypeEnum getPayType();
+    LoginTypeEnum getloginType();
 }

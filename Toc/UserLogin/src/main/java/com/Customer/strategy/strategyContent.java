@@ -41,7 +41,7 @@ public class strategyContent implements InitializingBean, ApplicationContextAwar
         //
         appContext.getBeansOfType(loginStrategy.class)
                 .values()
-                .forEach(loginStrategy -> LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(loginStrategy.getPayType(), loginStrategy));
+                .forEach(loginStrategy -> LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(loginStrategy.getloginType(), loginStrategy));
     }
 }
 

@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 39.106.54.125:8848
+        file-extension: yaml
+        refresh-enabled: true
+        group: userlogin
+        namespace: 2baa1cf1-5510-45d5-9cb2-386305be0509
+        prefix: user-login
+      discovery:
+        server-addr: 39.106.54.125:8848
+    inetutils:
+      preferred-networks: 39.106.54.125
+  profiles:
+    active: dev
+  application:
+    name: user-login
+  devtools:
+    add-properties: false

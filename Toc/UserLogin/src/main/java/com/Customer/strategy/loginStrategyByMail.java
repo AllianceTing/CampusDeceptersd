@@ -1,6 +1,10 @@
 package com.Customer.strategy;
 
+import com.Customer.chains.piepleContent;
+import com.Customer.chains.pipelineExecutor;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * PROJECT_NAME loginStrategyByWeChat
@@ -10,9 +14,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class loginStrategyByMail implements loginStrategy {
+    @Resource
+    pipelineExecutor pipelineExecutor;
+
     @Override
-    public boolean loginStrategy() {
-        return false;
+    public boolean loginStrategy(piepleContent data) {
+        return pipelineExecutor.acceptSync(data);
     }
 
     @Override

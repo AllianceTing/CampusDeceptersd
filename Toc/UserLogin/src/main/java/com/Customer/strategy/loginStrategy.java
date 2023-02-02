@@ -1,15 +1,14 @@
 package com.Customer.strategy;
 
-import org.springframework.stereotype.Component;
+import com.Customer.chains.piepleContent;
 
 /*
  * PROJECT_NAME loginStrategy
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~11:59
  */
-@Component
-public interface loginStrategy {
-    boolean loginStrategy();
+public interface loginStrategy<T extends piepleContent> {
+    boolean loginStrategy(T data);
 
     LoginTypeEnum getloginType();
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+
 /**
  * PROJECT_NAME UserLogin
  *
@@ -31,37 +32,14 @@ public class UserLogin {
     UserService userService;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank UserVo userVo, @NotBlank String strategyName) {
-        //请求体不为空
-        if (true) {
-            boolean b = strategyContent.getLoginStrategy(LoginTypeEnum.WeChatLogin).
+    public Object userLogin(@RequestBody @NotBlank UserVo userVo, @NotBlank LoginTypeEnum strategyName) {
+        boolean flag = strategyContent.getLoginStrategy(strategyName).loginStrategy(userVo);
+        if (flag) {
+            return ResultUtils.success(ErrorCode.SUCCESS);
         }
-        if (true) {
-            strategyContent.getLoginStrategy(LoginTypeEnum.MailLogin).loginStrategy();
-        }
-        if (true) {
-            strategyContent.getLoginStrategy(LoginTypeEnum.MessageLogin).loginStrategy();
-        }
-
-
-        if (userVo == null) {
-            throw new BusinessException(ErrorCode.NULL_ERROR);
-        }
-        var userPassword = userVo.getUserPassword().trim();
-        if (userPassword.length() >= 2 && userPassword.length() <= 18) {
-            QueryWrapper<User> userQueryWrapper = getListUserPage(userVo);
-            return userService.getOne(userQueryWrapper) == null ? ResultUtils.error(ErrorCode.AUTH_ERROR) : ResultUtils.success(ErrorCode.SUCCESS);
-        } else {
-            return ResultUtils.error(ErrorCode.AUTH_ERROR);
-        }
+        return ResultUtils.error(ErrorCode.AUTH_ERROR);
     }
 
-    public QueryWrapper<User> getListUserPage(UserVo userVo) {
-        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
-        UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
-        UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
-        return UserBasequeryWrapper;
-    }
 
     @PostMapping("/registry")
     public Object userRegistry(@RequestBody @NotBlank @NotEmpty UserVo userVo) {

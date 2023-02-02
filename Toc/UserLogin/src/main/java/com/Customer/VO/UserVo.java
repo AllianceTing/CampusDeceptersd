@@ -1,5 +1,6 @@
 package com.Customer.VO;
 
+import com.Customer.chains.piepleContent;
 import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.common.value.qual.MinLen;
@@ -15,7 +16,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class UserVo implements Serializable {
+public class UserVo extends piepleContent implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      *

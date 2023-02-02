@@ -18,6 +18,7 @@ public class piepleContentValidatePreChecker implements Contenxthandler<UserLogi
      */
     @Override
     public boolean handle(UserLoginReuestContent context) {
-        return false;
+
+        return true;
     }
 }

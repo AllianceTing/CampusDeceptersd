@@ -1,9 +1,5 @@
 package com.Customer.strategy;
 
-import io.micrometer.core.lang.NonNull;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -16,10 +12,14 @@ import java.util.Map;
  * DATE 2023/2/2~12:03
  */
 @Service
-public class strategyContent implements InitializingBean, ApplicationContextAware {
-    private static final Map<LoginTypeEnum, loginStrategy> LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP = new HashMap<>();
+public class strategyContent {
+    public static final Map<LoginTypeEnum, loginStrategy> LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP = new HashMap<>();
 
-    private ApplicationContext appContext;
+    static {
+        LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(LoginTypeEnum.MailLogin, new loginStrategyByMail());
+        LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(LoginTypeEnum.MessageLogin, new loginStrategyByMessage());
+        LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(LoginTypeEnum.WeChatLogin, new loginStrategyByWeChat());
+    }
 
     public static loginStrategy getLoginStrategy(LoginTypeEnum LoginType) {
         if (LoginType == null) {
@@ -31,17 +31,5 @@ public class strategyContent implements InitializingBean, ApplicationContextAwar
         return LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.get(LoginType);
     }
 
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
-        appContext = applicationContext;
-    }
-
-    @Override
-    public void afterPropertiesSet() {
-        //
-        appContext.getBeansOfType(loginStrategy.class)
-                .values()
-                .forEach(loginStrategy -> LOGIN_TYPE_ENUMLOGIN_STRATEGY_MAP.put(loginStrategy.getloginType(), loginStrategy));
-    }
 }
 

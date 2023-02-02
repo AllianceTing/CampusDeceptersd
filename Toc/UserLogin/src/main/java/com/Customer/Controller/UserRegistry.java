@@ -1,16 +1,9 @@
 package com.Customer.Controller;
 
-
-//import com.Customer.Service.RegistryMailService;
-
-import com.Customer.Exception.ErrorCode;
 import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
-import com.Customer.VO.MailVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.apache.ibatis.annotations.Param;
-import org.checkerframework.checker.units.qual.Length;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,6 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserRegistry {
     @Resource
     private UserService userService;
+
     @PostMapping("/register")
     public Object registryUserByNumber(@RequestBody @Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$"
             , message = "手机号格式有误") String phoneNumber, HttpServletRequest req) {
@@ -60,8 +54,8 @@ public class UserRegistry {
             return ResultUtils.error(50404, "验证码错误", "");
         }
         return ResultUtils.success("OK");
-
     }
+}
 
 
 

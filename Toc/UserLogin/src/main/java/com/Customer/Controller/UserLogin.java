@@ -6,13 +6,14 @@ import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.VO.UserVo;
+import com.Customer.strategy.strategyContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -24,27 +25,33 @@ import javax.validation.constraints.NotEmpty;
  */
 @RestController
 @RequestMapping(value = "/user")
+@RequiredArgsConstructor
 public class UserLogin {
-    @Resource
     UserService userService;
+    strategyContent strategy;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank UserVo userVo) {
+    public Object userLogin(@RequestBody @NotBlank UserVo userVo, String strategyName) {
         //请求体不为空
+
         if (userVo == null) {
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
         var userPassword = userVo.getUserPassword().trim();
         if (userPassword.length() >= 2 && userPassword.length() <= 18) {
-            QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
-            UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
-            UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
-            return userService.getOne(UserBasequeryWrapper) == null ? ResultUtils.error(ErrorCode.AUTH_ERROR) : ResultUtils.success(ErrorCode.SUCCESS);
+            QueryWrapper<User> userQueryWrapper = getListUserPage(userVo);
+            return userService.getOne(userQueryWrapper) == null ? ResultUtils.error(ErrorCode.AUTH_ERROR) : ResultUtils.success(ErrorCode.SUCCESS);
         } else {
             return ResultUtils.error(ErrorCode.AUTH_ERROR);
         }
     }
 
+    public QueryWrapper<User> getListUserPage(UserVo userVo) {
+        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
+        UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
+        UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
+        return UserBasequeryWrapper;
+    }
 
     @PostMapping("/registry")
     public Object userRegistry(@RequestBody @NotBlank @NotEmpty UserVo userVo) {

@@ -6,6 +6,7 @@ import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.VO.UserVo;
+import com.Customer.strategy.LoginTypeEnum;
 import com.Customer.strategy.strategyContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,20 @@ import javax.validation.constraints.NotEmpty;
 @RequiredArgsConstructor
 public class UserLogin {
     UserService userService;
-    strategyContent strategy;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank UserVo userVo, String strategyName) {
+    public Object userLogin(@RequestBody @NotBlank UserVo userVo, @NotBlank String strategyName) {
         //请求体不为空
+        if (true) {
+            strategyContent.getLoginStrategy(LoginTypeEnum.WeChatLogin).loginStrategy();
+        }
+        if (true) {
+            strategyContent.getLoginStrategy(LoginTypeEnum.MailLogin).loginStrategy();
+        }
+        if (true) {
+            strategyContent.getLoginStrategy(LoginTypeEnum.MessageLogin).loginStrategy();
+        }
+
 
         if (userVo == null) {
             throw new BusinessException(ErrorCode.NULL_ERROR);

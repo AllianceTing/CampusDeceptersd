@@ -21,7 +21,7 @@ public class strategyContent implements InitializingBean, ApplicationContextAwar
 
     private ApplicationContext appContext;
 
-    public static loginStrategy getPayment(LoginTypeEnum LoginType) {
+    public static loginStrategy getLoginStrategy(LoginTypeEnum LoginType) {
         if (LoginType == null) {
             throw new IllegalArgumentException("Login type is empty.");
         }

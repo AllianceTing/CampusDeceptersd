@@ -1,6 +1,8 @@
 package com.Customer.Service;
 
 import com.Customer.PO.User;
+import com.Customer.chains.UserLoginReuestContent;
+import com.Customer.strategy.LoginTypeEnum;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 
 public interface UserService extends IService<User> {
+    Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName);
+
 }

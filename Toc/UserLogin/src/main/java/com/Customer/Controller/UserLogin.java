@@ -6,10 +6,11 @@ import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.VO.UserVo;
+import com.Customer.chains.UserLoginReuestContent;
 import com.Customer.strategy.LoginTypeEnum;
-import com.Customer.strategy.strategyContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,14 +33,10 @@ public class UserLogin {
     UserService userService;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank UserVo userVo, @NotBlank LoginTypeEnum strategyName) {
-        boolean flag = strategyContent.getLoginStrategy(strategyName).loginStrategy(userVo);
-        if (flag) {
-            return ResultUtils.success(ErrorCode.SUCCESS);
-        }
-        return ResultUtils.error(ErrorCode.AUTH_ERROR);
-    }
+    public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @NotBlank LoginTypeEnum strategyName) {
+        return userService.doUserLogin(userVo, strategyName);
 
+    }
 
     @PostMapping("/registry")
     public Object userRegistry(@RequestBody @NotBlank @NotEmpty UserVo userVo) {

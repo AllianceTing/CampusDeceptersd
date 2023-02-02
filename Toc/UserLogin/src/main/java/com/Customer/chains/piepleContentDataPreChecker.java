@@ -2,9 +2,7 @@ package com.Customer.chains;
 
 import com.Customer.Exception.BusinessException;
 import com.Customer.Exception.ErrorCode;
-import com.Customer.PO.User;
 import com.Customer.Service.UserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -33,18 +31,9 @@ public class piepleContentDataPreChecker implements Contenxthandler<UserLoginReu
         }
         var userPassword = userVo.getUserPassword().trim();
         if (userPassword.length() >= 2 && userPassword.length() <= 18) {
-            QueryWrapper<User> userQueryWrapper = getListUserPage(userVo);
-            return userService.getOne(userQueryWrapper) == null ? false : true;
+            return true;
         } else {
-            throw new BusinessException(ErrorCode.AUTH_ERROR);
+            return false;
         }
-    }
-
-
-    public QueryWrapper<User> getListUserPage(UserLoginReuestContent userVo) {
-        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
-        UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
-        UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
-        return UserBasequeryWrapper;
     }
 }

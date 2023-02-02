@@ -55,6 +55,12 @@ public class UserRegistry {
         }
         return ResultUtils.success("OK");
     }
+
+    @PostMapping("/missing/ByMail")
+    public Object missingAccountByMail() {
+
+        return "";
+    }
 }
 
 
